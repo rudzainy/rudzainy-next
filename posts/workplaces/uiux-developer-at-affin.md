@@ -1,7 +1,7 @@
 ---
 title: 'UI/UX Developer'
 date: '2021-01-01'
-duration: 'Jan - March 2021'
+duration: 'January - March 2021'
 company: 'Digital Banking, Affin Bank'
 location: 'Kuala Lumpur, Malaysia'
 keyword: [ui, ux, web development]

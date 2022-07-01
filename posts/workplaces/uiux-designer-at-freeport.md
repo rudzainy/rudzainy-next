@@ -1,7 +1,7 @@
 ---
 title: 'UI/UX Designer'
 date: '2021-08-01'
-duration: 'Aug - September 2021'
+duration: 'August - September 2021'
 company: 'Freeport Systems'
 location: 'Selangor, Malaysia'
 keyword: [ui, ux]
