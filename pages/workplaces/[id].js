@@ -30,7 +30,7 @@ export default function Workplace({ postData, preview }) {
         <title>{`${postData.title} at ${postData.company}`}</title>
       </Head>
       <Container>
-        <Intro title={`${postData.title} at ${postData.company}`} />
+        <Intro title={`${postData.title} at ${postData.company}`} description={postData.abstract} />
       </Container>
       <Container>
         <article>

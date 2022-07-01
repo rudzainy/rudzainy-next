@@ -7,7 +7,13 @@ export default function Intro({ title = NAME, description = SELF_INTRO }) {
         {title}.
       </h1>
       <h4 className="text-center md:text-left text-lg mt-5 md:pl-8">
-        {description}
+        {
+          Array.isArray(description) ? 
+            description.map((point, id) => 
+              <li key={id} className="mb-4 text-base font-normal text-gray-500">{point}</li>
+            )
+          : description
+        }
       </h4>
     </section>
   )
