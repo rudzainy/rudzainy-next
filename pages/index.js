@@ -53,8 +53,8 @@ export default function Portfolio({ sortedAllEvents, preview }) {
         <Intro title={NAME} />
       </Container>
       <Container>
-        <div className="flex justify-end mb-16">
-          <div className="mr-3 text-md text-gray-500">Show/hide</div>
+        <div className="flex justify-center md:justify-end mb-16">
+          <div className="mr-3 text-md text-gray-500 hidden md:block">Show/hide</div>
           <label htmlFor="wordpress-toggle" className="mr-3 inline-flex relative items-center cursor-pointer">
             <input type="checkbox" value="" id="wordpress-toggle" className="sr-only peer" checked={showWordpressPosts} 
               onChange={(e) => setShowWordpressPosts(!showWordpressPosts)}
