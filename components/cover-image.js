@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default function CoverImage({ title, coverImage, slug }) {
+  const titleThatSaysLogo = /logo/i
+
   const image = (
     <Image
       width={2000}
@@ -10,7 +12,9 @@ export default function CoverImage({ title, coverImage, slug }) {
       alt={`Cover Image for ${title}`}
       src={coverImage?.node.sourceUrl}
       className={cn('shadow-small', {
-        'object-cover hover:shadow-medium transition-shadow duration-200': slug,
+        'hover:shadow-medium transition-shadow duration-200 rounded-t-lg' : slug,
+        'object-top object-cover' : !titleThatSaysLogo.test(title),
+        'object-contain' : titleThatSaysLogo.test(title)
       })}
     />
   )
