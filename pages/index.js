@@ -4,8 +4,10 @@ import Intro from '../components/intro'
 import Layout from '../components/layout'
 import Event from '../components/timeline/event'
 import Workplace from '../components/timeline/workplace'
-import WordpressPost from '../components/timeline/wordpress-post';
+import WordpressPost from '../components/timeline/wordpress-post'
+import TweetEmbed from 'react-tweet-embed'
 import { getAllPostsForHome } from '../lib/wordpress-api'
+import { getTwitterTimelineData } from '../lib/twitter-api'
 import { NAME } from '../lib/constants'
 import { getSortedWorkplaceData } from '../lib/workplaces'
 import { useState } from 'react'
@@ -17,32 +19,43 @@ export default function Portfolio({ sortedAllEvents, preview }) {
   const [showTwitterPosts, setShowTwitterPosts] = useState(true)
 
   const processedEvents = sortedAllEvents.map((event) => {
-    return (
-      event.hasOwnProperty('slug') ? 
-        showWordpressPosts && 
-          <WordpressPost
-            key={event.slug}
-            title={event.title}
-            coverImage={event.featuredImage}
-            date={event.date}
-            slug={event.slug}
-            excerpt={event.excerpt}
-          />
-        : showWorkplaces &&
-          <Workplace 
-            key={event.id}
-            id={event.id}
-            title={event.title} 
-            duration={event.duration} 
-            company={event.company} 
-            location={event.location} 
-            abstract={event.abstract}
-            keyword={event.keyword}
-            hasContent={event.hasContent}
-            date={event.date}
-            preview={preview}
-          />
-    )})
+    switch (event.origin) {
+      case 'wordpress':
+        return (
+          showWordpressPosts && 
+            <WordpressPost
+              key={event.slug}
+              title={event.title}
+              coverImage={event.featuredImage}
+              date={event.date}
+              slug={event.slug}
+              excerpt={event.excerpt}
+            />
+        )
+      case 'workplace': 
+        return(
+          showWorkplaces &&
+            <Workplace 
+              key={event.id}
+              id={event.id}
+              title={event.title} 
+              duration={event.duration} 
+              company={event.company} 
+              location={event.location} 
+              abstract={event.abstract}
+              keyword={event.keyword}
+              hasContent={event.hasContent}
+              date={event.date}
+              preview={preview}
+            />
+        )
+      case 'twitter':
+        return(
+          showTwitterPosts && 
+            <TweetEmbed tweetId={event.id} />
+        )
+    }
+  })
   
   return (
     <Layout preview={preview}>
@@ -69,17 +82,17 @@ export default function Portfolio({ sortedAllEvents, preview }) {
             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ml-3 text-sm font-medium text-gray-900">Workplaces</span>
           </label>
-          {/* <label htmlFor="portfolio-toggle" className="inline-flex relative items-center cursor-pointer">
-            <input type="checkbox" value="" id="portfolio-toggle" className="sr-only peer" />
-            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-            <span className="ml-3 text-sm font-medium text-gray-900">Portfolio</span>
-          </label>
           <label htmlFor="twitter-toggle" className="inline-flex relative items-center cursor-pointer">
             <input type="checkbox" value="" id="twitter-toggle" className="sr-only peer" checked={showTwitterPosts} 
               onChange={(e) => setShowTwitterPosts(!showTwitterPosts)}
             />
             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ml-3 text-sm font-medium text-gray-900">Twitter</span>
+          </label>
+          {/* <label htmlFor="portfolio-toggle" className="inline-flex relative items-center cursor-pointer">
+            <input type="checkbox" value="" id="portfolio-toggle" className="sr-only peer" />
+            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            <span className="ml-3 text-sm font-medium text-gray-900">Portfolio</span>
           </label>
           <label htmlFor="instagram-toggle" className="inline-flex relative items-center cursor-pointer">
             <input type="checkbox" value="" id="instagram-toggle" className="sr-only peer" />
@@ -98,10 +111,28 @@ export default function Portfolio({ sortedAllEvents, preview }) {
 }
 
 export async function getStaticProps({ preview = false }) {
-  const allPosts = await getAllPostsForHome(preview)
+  // Pull data from everywhere else
+  const allWordpressPosts = await getAllPostsForHome(preview)
   const allWorkplacesData = getSortedWorkplaceData()
-  const allEvents = [...allPosts.edges, ...allWorkplacesData]
+  const allTweets = getTwitterTimelineData()
 
+  // Assign origin properties
+  for (const key in allWordpressPosts.nodes) {
+    allWordpressPosts.nodes[key].origin = "wordpress" 
+  }
+  for (const key in allWorkplacesData) {
+    allWorkplacesData[key].origin = "workplace" 
+  }
+  for (const key in allTweets) {
+    allTweets[key].origin = "twitter" 
+  }
+
+  const assignEventType = (array) => {
+
+  }
+
+  const allEvents = [...allWordpressPosts.nodes, ...allWorkplacesData, ...allTweets]
+console.log(allEvents)
   const sortedAllEvents = allEvents.map((event) => event.hasOwnProperty('node') ? event.node : event)
 
   sortedAllEvents.sort(({ date: a }, { date: b }) => {
