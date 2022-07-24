@@ -1,3 +1,20 @@
+TODO:
+[ ] Update README 
+[ ] Pull selected tweets from Twitter
+  [ ] update WordPress 
+    [ ] include origin: 'wordpress' GraphQL endpoint
+    [ ] re-do how sortedAllEvents parses events from different origins
+  [ ] use Twitter v2 endpoints
+    [x] create twitter-api.js to handle requests to/from Twitter
+    [ ] try 
+      [x] [twitter-api-v2](https://github.com/PLhery/node-twitter-api-v2)
+      [x] [react-tweet-embed](https://github.com/capaj/react-tweet-embed)
+      [ ] [Twitter-API-v2-sample-code](https://github.com/twitterdev/Twitter-API-v2-sample-code)
+  [ ] build card for tweets?
+[ ] Pull selected posts from Instagram
+[ ] Pull selected posts from Blogspot
+
+
 # A statically generated blog example using Next.js and WordPress
 
 This example showcases Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using [WordPress](https://wordpress.org) as the data source.
