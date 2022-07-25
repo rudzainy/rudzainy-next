@@ -13,7 +13,7 @@ import { getSortedWorkplaceData } from '../lib/workplaces'
 import { useState } from 'react'
 
 
-export default function Portfolio({ sortedAllEvents, preview }) {
+export default function Index({ sortedAllEvents, preview }) {
   const [showWorkplaces, setShowWorkplaces] = useState(true)
   const [showWordpressPosts, setShowWordpressPosts] = useState(true)
   const [showTwitterPosts, setShowTwitterPosts] = useState(true)
@@ -132,7 +132,6 @@ export async function getStaticProps({ preview = false }) {
   }
 
   const allEvents = [...allWordpressPosts.nodes, ...allWorkplacesData, ...allTweets]
-console.log(allEvents)
   const sortedAllEvents = allEvents.map((event) => event.hasOwnProperty('node') ? event.node : event)
 
   sortedAllEvents.sort(({ date: a }, { date: b }) => {
