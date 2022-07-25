@@ -7,7 +7,7 @@ export default function Footer() {
       <Container>
         <div className="py-28 flex flex-col lg:flex-row items-center">
           <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-            [🚧 Contents placeholder 🚧]
+            More stuff!
           </h3>
           <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-4 lg:w-1/2">
             <Link href="http://bincang.hoojah.my">
@@ -19,6 +19,9 @@ export default function Footer() {
             </Link>
           </div>
         </div>
+      </Container>
+      <Container>
+        <iframe id='kofiframe' src='https://ko-fi.com/rudzainy/?hidefeed=true&widget=true&embed=true&preview=true' className="border-none w-full p-1" height='712' title='rudzainy'></iframe>
       </Container>
     </footer>
   )

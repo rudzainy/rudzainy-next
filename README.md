@@ -1,9 +1,10 @@
 TODO:
+[ ] Add Ko-Fi link
 [ ] Update README 
 [ ] Pull selected tweets from Twitter
-  [ ] update WordPress 
-    [ ] include origin: 'wordpress' GraphQL endpoint
-    [ ] re-do how sortedAllEvents parses events from different origins
+  [x] update WordPress 
+    [x] include origin: 'wordpress' GraphQL endpoint
+    [x] re-do how sortedAllEvents parses events from different origins
   [ ] use Twitter v2 endpoints
     [x] create twitter-api.js to handle requests to/from Twitter
     [ ] try 
@@ -13,6 +14,8 @@ TODO:
   [ ] build card for tweets?
 [ ] Pull selected posts from Instagram
 [ ] Pull selected posts from Blogspot
+[ ] Use localStorage to cache toggle settings?
+[ ] Style post page
 
 
 # A statically generated blog example using Next.js and WordPress
