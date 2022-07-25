@@ -30,6 +30,7 @@ export default function Index({ sortedAllEvents, preview }) {
               date={event.date}
               slug={event.slug}
               excerpt={event.excerpt}
+              link={event.link}
             />
         )
       case 'workplace': 
@@ -66,35 +67,35 @@ export default function Index({ sortedAllEvents, preview }) {
         <Intro title={NAME} />
       </Container>
       <Container>
-        <div className="flex justify-center md:justify-end mb-16">
+        <div className="flex flex-wrap sm:justify-center md:justify-end mb-16">
           <div className="text-md text-gray-500 hidden md:block">Show/hide</div>
-          <label htmlFor="wordpress-toggle" className="ml-3 inline-flex relative items-center cursor-pointer">
+          <label htmlFor="wordpress-toggle" className="m-3 inline-flex relative items-center cursor-pointer">
             <input type="checkbox" value="" id="wordpress-toggle" className="sr-only peer" checked={showWordpressPosts} 
               onChange={(e) => setShowWordpressPosts(!showWordpressPosts)}
             />
             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ml-3 text-sm font-medium text-gray-900">Blog posts</span>
           </label>
-          <label htmlFor="workplaces-toggle" className="ml-3 inline-flex relative items-center cursor-pointer">
+          <label htmlFor="workplaces-toggle" className="m-3 inline-flex relative items-center cursor-pointer">
             <input type="checkbox" value="" id="workplaces-toggle" className="sr-only peer" checked={showWorkplaces} 
               onChange={(e) => setShowWorkplaces(!showWorkplaces)}
             />
             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ml-3 text-sm font-medium text-gray-900">Workplaces</span>
           </label>
-          <label htmlFor="twitter-toggle" className="ml-3 inline-flex relative items-center cursor-pointer">
+          <label htmlFor="twitter-toggle" className="m-3 inline-flex relative items-center cursor-pointer">
             <input type="checkbox" value="" id="twitter-toggle" className="sr-only peer" checked={showTwitterPosts} 
               onChange={(e) => setShowTwitterPosts(!showTwitterPosts)}
             />
             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ml-3 text-sm font-medium text-gray-900">Twitter</span>
           </label>
-          {/* <label htmlFor="portfolio-toggle" className="ml-3 inline-flex relative items-center cursor-pointer">
+          {/* <label htmlFor="portfolio-toggle" className="m-3 inline-flex relative items-center cursor-pointer">
             <input type="checkbox" value="" id="portfolio-toggle" className="sr-only peer" />
             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ml-3 text-sm font-medium text-gray-900">Portfolio</span>
           </label>
-          <label htmlFor="instagram-toggle" className="ml-3 inline-flex relative items-center cursor-pointer">
+          <label htmlFor="instagram-toggle" className="m-3 inline-flex relative items-center cursor-pointer">
             <input type="checkbox" value="" id="instagram-toggle" className="sr-only peer" />
             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ml-3 text-sm font-medium text-gray-900">Instagram</span>
