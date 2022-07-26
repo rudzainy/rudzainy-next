@@ -14,3 +14,9 @@ abstract: [Design journey map for NSW Metro integrated payment system, Developed
 Working at Freeport was very exciting for the short duration I was there.
 
 Used a lot of learnings from my time in DXC
+
+- freeport is an building solution management
+    - architecture arm
+    - construction arm
+    - the company i worked on, freeport systems, takes care of IT and application development and management
+- small company, team of 1 ux designer

@@ -1,21 +1,31 @@
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H65CY0P)
+
 TODO:
-[ ] Add Ko-Fi link
-[ ] Update README 
-[ ] Pull selected tweets from Twitter
+------------
+[ ] Timeline
+  [x] Add Ko-Fi link
+  [ ] Pull selected tweets from Twitter
+    [ ] use Twitter v2 endpoints
+      [x] create twitter-api.js to handle requests to/from Twitter
+      [ ] try 
+        [x] [twitter-api-v2](https://github.com/PLhery/node-twitter-api-v2)
+        [x] [react-tweet-embed](https://github.com/capaj/react-tweet-embed)
+        [ ] [Twitter-API-v2-sample-code](https://github.com/twitterdev/Twitter-API-v2-sample-code)
+      [ ] hand pick tweets
+        [ ] use postman to query from twitter api?
   [x] update WordPress 
     [x] include origin: 'wordpress' GraphQL endpoint
     [x] re-do how sortedAllEvents parses events from different origins
-  [ ] use Twitter v2 endpoints
-    [x] create twitter-api.js to handle requests to/from Twitter
-    [ ] try 
-      [x] [twitter-api-v2](https://github.com/PLhery/node-twitter-api-v2)
-      [x] [react-tweet-embed](https://github.com/capaj/react-tweet-embed)
-      [ ] [Twitter-API-v2-sample-code](https://github.com/twitterdev/Twitter-API-v2-sample-code)
   [ ] build card for tweets?
-[ ] Pull selected posts from Instagram
-[ ] Pull selected posts from Blogspot
-[ ] Use localStorage to cache toggle settings?
+  [ ] timeline icons based on type
+    [ ] install fontawesome
+  [ ] Pull selected posts from Instagram
+  [ ] Pull selected posts from Blogspot
+  [ ] event toggle
+    [ ] Use localStorage to cache toggle settings?
+    [x] stick to top on scroll up
 [ ] Style post page
+[ ] Update README 
 
 
 # A statically generated blog example using Next.js and WordPress

@@ -8,3 +8,9 @@ keyword: [ui, ux, web development]
 hasContent: false
 abstract: [Managed a project to revamp Affin Group websites, Managed a junior UI/UX designer, Kicked off component based design effort]
 ---
+- it was a good opportunity for me
+- i lead a team of two including myself
+- also manage a web consolidation project
+- a lot of internal politics lead to a lot of bad design decisions made by poor leaders
+- a lot of workarounds
+- unfortunately i decided to not continue

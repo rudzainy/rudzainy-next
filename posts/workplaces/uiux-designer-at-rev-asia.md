@@ -13,5 +13,11 @@ Redesign says.com from the ground up
 - UX research on how to optimise reader’s and writer’s experiences for news portals
 - Revamp says.com UI
 - Research on optimising workflow for the tech team across multiple news portals
+- love the people
+- love the work environment
+- nothing much for me to do
+    - ux is done
+    - i did engineering tasks
+    - offered a video producer role
 - Left after being called back by UI/UX team in DXC Technology, but the pandemic
 has caused all new hirings to be frozen
