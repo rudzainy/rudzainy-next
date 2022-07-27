@@ -17,13 +17,14 @@ TODO:
     [x] include origin: 'wordpress' GraphQL endpoint
     [x] re-do how sortedAllEvents parses events from different origins
   [ ] build card for tweets?
-  [ ] timeline icons based on type
-    [ ] install fontawesome
+  [x] timeline icons based on type
+    [x] install fontawesome
   [ ] Pull selected posts from Instagram
   [ ] Pull selected posts from Blogspot
   [ ] event toggle
     [ ] Use localStorage to cache toggle settings?
     [x] stick to top on scroll up
+    [x] hide helper text to save some vertical screen space
 [ ] Style post page
 [ ] Update README 
 

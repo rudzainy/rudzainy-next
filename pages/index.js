@@ -20,7 +20,7 @@ export default function Index({ sortedAllEvents, preview }) {
 
   // START - Handles show & hide of helper text in filter
   // Helper text is hidden to save vertical space on small screens
-  const [showFilterHelperText, setShowFilterHelperText] = useState(true)
+  const [filterIsNotSticky, setFilterIsNotSticky] = useState(true)
 
   useEffect(() => {   
     window.addEventListener("scroll", listenToScroll);
@@ -34,22 +34,19 @@ export default function Index({ sortedAllEvents, preview }) {
         document.documentElement.scrollTop;
        
     if (winScroll > heightToHideFrom) { 
-      showFilterHelperText &&      // to limit setting state only the first time         
-         setShowFilterHelperText(false);
+      filterIsNotSticky &&      // to limit setting state only the first time         
+         setFilterIsNotSticky(false);
     } else {
-         setShowFilterHelperText(true);
+         setFilterIsNotSticky(true);
     }  
   };
-  
-  // const getOffset = (element) => {
-  //   const rect = element?.getBoundingClientRect(),
-  //     scrollTop = 
-  //       window.pageYOffset ||  document.documentElement.scrollTop;
-  //   return rect.top + scrollTop;
-  // };  
-
-  // const heightToHideFrom = getOffset(document.querySelector("#top-anchor"))
   // END
+  const goToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
+  };
 
   const processedEvents = sortedAllEvents.map((event) => {
     switch (event.origin) {
@@ -100,13 +97,19 @@ export default function Index({ sortedAllEvents, preview }) {
       <Head>
         <title>{NAME}</title>
       </Head>
-      <Container id="top-anchor">
+      <Container>
         <Intro title={NAME} />
       </Container>
       <nav className='sticky top-0 mx-auto px-8 py-2 bg-slate-100/[.98] z-50 shadow-xl'>
         { 
-          showFilterHelperText &&
-            <div className="flex flex-wrap sm:justify-center md:justify-end text-sm text-gray-500 pt-2">You can use these toggles to show or hide my timeline contents below.</div>
+          filterIsNotSticky &&
+            <div className="flex flex-wrap sm:justify-center md:justify-end text-sm text-gray-500 pt-2 transition transition-opacity ease-in-out">You can use these toggles to show or hide my timeline contents below.</div>
+        }
+        { 
+          !filterIsNotSticky &&  
+          <h1 className="text-xl font-bold tracking-tighter leading-tight sm:text-center md:text-right md:pr-2">
+            <a onClick={goToTop}>{NAME}.</a>
+          </h1>
         }
         <div className="flex flex-wrap sm:justify-center md:justify-end">
           <label htmlFor="wordpress-toggle" className="m-3 inline-flex relative items-center cursor-pointer">
@@ -142,10 +145,17 @@ export default function Index({ sortedAllEvents, preview }) {
           </label> */}
         </div>
       </nav>
-      <Container className="">
+      <Container>
         <ol className="relative border-l border-gray-200 mt-16">
           {(sortedAllEvents && processedEvents)}
         </ol>
+        {
+          showWordpressPosts == false && showWorkplaces == false && showTwitterPosts == false &&
+            <div className="grid justify-items-center">
+              <div className="text-lg">Nothing to see here.</div>
+              <div className="text-xl">Move along. </div>
+            </div>
+        }
       </Container>
     </Layout>
   )
@@ -166,10 +176,6 @@ export async function getStaticProps({ preview = false }) {
   }
   for (const key in allTweets) {
     allTweets[key].origin = "twitter" 
-  }
-
-  const assignEventType = (array) => {
-
   }
 
   const allEvents = [...allWordpressPosts.nodes, ...allWorkplacesData, ...allTweets]

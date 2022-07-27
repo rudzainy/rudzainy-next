@@ -1,6 +1,12 @@
 import { parseISO, format } from 'date-fns'
 
-export default function Date({ dateString, dateClass }) {
+export default function Date({ dateString, dateClass, hideDay = false }) {
   const date = parseISO(dateString)
-  return <time className={dateClass} dateTime={dateString}>{format(date, 'LLLL	d, yyyy')}</time>
+  let dateFormat = ''
+  if (hideDay) {
+    dateFormat = 'LLLL yyyy'
+  } else {
+    dateFormat = 'LLLL	d, yyyy'
+  }
+  return <time className={dateClass} dateTime={dateString}>{format(date, dateFormat)}</time>
 }

@@ -9,7 +9,7 @@ export default function Workplace({ id, title, duration, company, location, abst
       <span className="flex absolute -left-3 justify-center items-center w-6 h-6 bg-emerald-500 rounded-full ring-8 ring-white">
         <FontAwesomeIcon icon={solid('briefcase')} className="w-3 text-white" />
       </span>
-      <Date dateString={date} dateClass="block pt-1 mb-2 text-sm font-normal leading-none text-gray-400" />    
+      <Date dateString={date} dateClass="block pt-1 mb-2 text-sm font-normal leading-none text-gray-400" hideDay />    
       <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900">{title}</h3>
       <p className="block mb-2 text-sm font-normal leading-none text-gray-400">{company} | {duration} | {location}</p>
       <div className="my-2.5">
