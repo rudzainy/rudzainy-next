@@ -10,13 +10,46 @@ import { getAllPostsForHome } from '../lib/wordpress-api'
 import { getTwitterTimelineData } from '../lib/twitter-api'
 import { NAME } from '../lib/constants'
 import { getSortedWorkplaceData } from '../lib/workplaces'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 export default function Index({ sortedAllEvents, preview }) {
   const [showWorkplaces, setShowWorkplaces] = useState(false)
   const [showWordpressPosts, setShowWordpressPosts] = useState(true)
   const [showTwitterPosts, setShowTwitterPosts] = useState(true)
+
+  // START - Handles show & hide of helper text in filter
+  // Helper text is hidden to save vertical space on small screens
+  const [showFilterHelperText, setShowFilterHelperText] = useState(true)
+
+  useEffect(() => {   
+    window.addEventListener("scroll", listenToScroll);
+    return () => 
+       window.removeEventListener("scroll", listenToScroll); 
+  }, [])
+
+  const listenToScroll = () => {
+    let heightToHideFrom = 350;
+    const winScroll = document.body.scrollTop || 
+        document.documentElement.scrollTop;
+       
+    if (winScroll > heightToHideFrom) { 
+      showFilterHelperText &&      // to limit setting state only the first time         
+         setShowFilterHelperText(false);
+    } else {
+         setShowFilterHelperText(true);
+    }  
+  };
+  
+  // const getOffset = (element) => {
+  //   const rect = element?.getBoundingClientRect(),
+  //     scrollTop = 
+  //       window.pageYOffset ||  document.documentElement.scrollTop;
+  //   return rect.top + scrollTop;
+  // };  
+
+  // const heightToHideFrom = getOffset(document.querySelector("#top-anchor"))
+  // END
 
   const processedEvents = sortedAllEvents.map((event) => {
     switch (event.origin) {
@@ -67,11 +100,14 @@ export default function Index({ sortedAllEvents, preview }) {
       <Head>
         <title>{NAME}</title>
       </Head>
-      <Container>
+      <Container id="top-anchor">
         <Intro title={NAME} />
       </Container>
-      <nav className='sticky top-0 mx-auto px-8 py-4 bg-slate-100 z-50 shadow-xl'>
-        <div className="flex flex-wrap sm:justify-center md:justify-end text-sm text-gray-500">You can use these toggles to show or hide my timeline contents below.</div>
+      <nav className='sticky top-0 mx-auto px-8 py-2 bg-slate-100/[.98] z-50 shadow-xl'>
+        { 
+          showFilterHelperText &&
+            <div className="flex flex-wrap sm:justify-center md:justify-end text-sm text-gray-500 pt-2">You can use these toggles to show or hide my timeline contents below.</div>
+        }
         <div className="flex flex-wrap sm:justify-center md:justify-end">
           <label htmlFor="wordpress-toggle" className="m-3 inline-flex relative items-center cursor-pointer">
             <input type="checkbox" value="" id="wordpress-toggle" className="sr-only peer" checked={showWordpressPosts} 
